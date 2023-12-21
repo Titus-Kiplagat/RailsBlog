@@ -21,11 +21,11 @@ RSpec.describe User, type: :model do
     expect(User.build(name: '' || nil)).not_to be_valid "User's name cannot be blank"
   end
 
-  it "non-negative post_counter" do
+  it 'non-negative post_counter' do
     expect(User.build(name: 'John', post_counter: 0)).to be_valid
   end
 
-  it "negative post_counter" do
+  it 'negative post_counter' do
     expect(User.build(name: 'John', post_counter: -1)).not_to be_valid "User's post_counter cannot be negative"
   end
 
