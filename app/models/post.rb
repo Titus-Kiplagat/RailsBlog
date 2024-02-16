@@ -3,13 +3,17 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
 
-  def update_posts_counter
-    Post.group(:author_id).count.each do |author_id, posts_count|
-      User.find(author_id).update(posts_counter: posts_count)
-    end
-  end
+  validates :title, presence: true, length: { maximum: 250 }
+  validates :comments_counter, numericality: { greater_than_or_equal_to: 0, only_integer: true }
+  validates :likes_counter, numericality: { greater_than_or_equal_to: 0, only_integer: true }
 
   def recent_comments
     comments.order(created_at: :desc).limit(5)
+  end
+
+  private
+
+  def update_author_posts_counter
+    author.update_posts_counter
   end
 end
