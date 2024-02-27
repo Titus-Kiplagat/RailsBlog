@@ -1,0 +1,21 @@
+<div>
+  <h1>Users#index</h1>
+  <h1>Find me in app/views/users/index.html.erb</h1>
+  <ul>
+    <% @users.each do |user| %>
+      <li>
+			<%= link_to user_path(user) do %>
+        <%= image_tag user.photo, alt: "#{user.name}'s photo" %>
+        <div>
+          <h1>
+            <%= user.name %>
+          </h1>
+          <p>
+            <%= pluralize(user.posts_counter, "post")%>
+          </p>
+        </div>
+				<%end%>
+      </li>
+    <%end%>
+  </ul>
+</div>
