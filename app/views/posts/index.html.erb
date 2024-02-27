@@ -1,0 +1,28 @@
+<h1>Posts#index</h1>
+<p>Find me in app/views/posts/index.html.erb</p>
+<div>
+  <div>
+    <div>
+      <%= image_tag @user.photo, url: "#{@user.name}'s photo" %>
+    </div>
+    <div class="user">
+      <h2><%= @user.name %></h2>
+      <p><strong>Number of posts: </strong><%= @user.posts_counter %></p>
+    </div>
+  </div>
+  <% @posts.each_with_index do |post, index| %>
+    <div>
+      <%= link_to user_post_path(@user, post) do %>
+        <h2><%= post.title %> # <%= index + 1 %></h2>
+        <p><%= post.text %></p>
+        <p> <span>comments:</span> <%= post.comments_counter%>, <span>likes:</span><%= post.likes_counter %> </p>
+      <% end %>
+    </div>
+    <div>
+      <% post.recent_comments.each do |comment| %>
+        <p> <%= comment.user.name %> : <%= comment.text %> </p>
+      <% end %>
+    </div>
+  <% end %>
+  <%= will_paginate @posts %>
+</div>
