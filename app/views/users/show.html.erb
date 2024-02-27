@@ -1,0 +1,36 @@
+<h1>Users#show</h1>
+<h1>Find me in app/views/users/show.html.erb</h1>
+<div>
+  <div>
+    <%= image_tag @user.photo, alt: "#{@user.name}'s photo" %>
+    <div>
+      <h2>
+        <%= @user.name %>
+      </h2>
+      <p>
+        <%= pluralize(@user.posts_counter, "post")%>
+      </p>
+    </div>
+  </div>
+  <div>
+    <h2>Bio</h2>
+    <p><%= @user.bio %></p>
+  </div>
+  <ul>
+    <% @user.recent_posts.each_with_index do |post, index| %>
+      <li>
+        <h3><%= link_to post.title, user_post_path(@user, post) %> <%= index + 1 %> </h3>
+        <p><%= post.text %></p>
+        <div>
+          <span>Comments: <%= post.comments_counter %></span>
+          <span>Likes: <%= post.likes_counter %></span>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+  <% if @user.posts_counter > 3 %>
+    <button>
+      <%= link_to "See all posts", user_posts_path(@user) %>
+    </button>
+  <% end %>
+</div>
