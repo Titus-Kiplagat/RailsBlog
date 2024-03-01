@@ -14,3 +14,7 @@
     <% end %>
   </div>
 </div>
+<button>
+<%= link_to "create comment", new_user_post_comment_path(@user, @post) %>
+</button>
+<%= render 'likes/create' %>
